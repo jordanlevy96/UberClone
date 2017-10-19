@@ -1,21 +1,21 @@
-import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class Finder {
-	private ArrayList<Driver> availableDrivers;
-	private ArrayList<Passenger> seekingPassengers;
+	private PriorityQueue<Driver> availableDrivers;
+	private PriorityQueue<Passenger> seekingPassengers;
 	
 	public Finder() {
-		availableDrivers = new ArrayList<Driver>();
-		seekingPassengers = new ArrayList<Passenger>();
+		availableDrivers = new PriorityQueue<Driver>();
+		seekingPassengers = new PriorityQueue<Passenger>();
 	}
 	
 	public Driver requestDriver(int[][] start, int[][] dest) {
-		return availableDrivers.get(0); //gets first available driver
+		return availableDrivers.poll(); //gets first available driver
 		//should instead find the NEAREST driver
 	}
 	
 	public Passenger findPassenger(int[][] loc) {
-		return seekingPassengers.get(0); //gets first seeking passenger
+		return seekingPassengers.poll(); //gets first seeking passenger
 		//not sure if necessary at all
 	}
 }

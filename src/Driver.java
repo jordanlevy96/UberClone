@@ -15,5 +15,7 @@ public class Driver extends User {
 		this.status = Status.OFFLINE;
 	}
 	
-	
+	public Vehicle getCar() {
+		return this.car;
+	}
 }
