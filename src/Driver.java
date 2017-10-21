@@ -18,4 +18,8 @@ public class Driver extends User {
 	public Vehicle getCar() {
 		return this.car;
 	}
+
+	public boolean requestRide() {
+		return true;
+	}
 }

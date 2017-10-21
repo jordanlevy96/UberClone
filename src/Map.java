@@ -5,4 +5,6 @@ public class Map {
 	public Map() {
 		this.grid = new int[300][300];
 	}
+	
+	
 }

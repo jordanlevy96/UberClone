@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 
-public class User {
+public abstract class User {
 	protected String name;
 	protected double balance;
 	protected ArrayList<Review> reviews;
 	protected double rating;
 	protected Finder finder;
+	protected Location location;
 	
 	public User(String name, double b, Finder f) {
 		this.name = name;
@@ -28,5 +29,13 @@ public class User {
 		avg = avg / reviews.size();
 		
 		this.rating = avg;
+	}
+	
+	public Location getLocation() {
+		return this.location;
+	}
+	
+	public void setLocation(Location l) {
+		this.location = l;
 	}
 }
