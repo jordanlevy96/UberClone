@@ -38,4 +38,8 @@ public abstract class User {
 	public void setLocation(Location l) {
 		this.location = l;
 	}
+	
+	public double getRating() {
+		return this.rating;
+	}
 }

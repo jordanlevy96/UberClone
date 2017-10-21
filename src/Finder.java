@@ -20,7 +20,11 @@ public class Finder {
 					public int compare(Driver d1, Driver d2) {
 						double dist1 = d1.getLocation().getDistanceFrom(start);
 						double dist2 = d2.getLocation().getDistanceFrom(start);
-						return Double.compare(dist1, dist2);
+						int comparison = Double.compare(dist1, dist2);
+						if (comparison == 0) {
+							return Double.compare(d1.getRating(), d2.getRating());
+						}
+						return comparison;
 					}
 				}
 		);
