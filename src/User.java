@@ -8,19 +8,11 @@ public abstract class User {
 	protected ArrayList<Review> reviews;
 	protected double rating;
 	protected Location location;
-	protected Status status;
 	
 	public User(String name, double b) {
 		this.name = name;
 		this.balance = b;
 		this.rating = 4.0;
-		this.status = Status.OFFLINE;
-	}
-	
-	protected enum Status {
-		OFFLINE,
-		AVAILABLE,
-		OCCUPIED;
 	}
 	
 	public void moveTo(Location destination) {

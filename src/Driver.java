@@ -8,10 +8,6 @@ public class Driver extends User {
 		this.car = v;
 		
 	}
-	
-	public Vehicle getCar() {
-		return this.car;
-	}
 
 	public boolean requestRide(Trip trip) {
 		boolean answer = true; //TODO: make this an actual decision
@@ -50,5 +46,9 @@ public class Driver extends User {
 	
 	public Vehicle getVehicle() {
 		return this.car;
+	}
+	
+	public void setStatus(Status s) {
+		this.status = s;
 	}
 }

@@ -20,5 +20,6 @@ public class TripManager {
 		
 		Review review = passenger.generateReview(trip);
 		driver.addReview(review);
+		driver.setStatus(Status.AVAILABLE);
 	}
 }
