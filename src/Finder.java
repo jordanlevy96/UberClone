@@ -11,9 +11,12 @@ public class Finder {
 //		seekingPassengers = new PriorityQueue<Passenger>();
 	}
 	
-	public Driver requestDriver(Location start, Location dest) {
+	public Trip requestDriver(Passenger passenger, Location dest) {
 		Driver driver = null;
-		Driver temp;
+		Driver tempDriver;
+		Location start = passenger.getLocation();
+		Trip tempTrip;
+		
 		PriorityQueue<Driver> closestDrivers = new PriorityQueue<Driver>(availableDrivers.size(),
 				new Comparator<Driver>() {
 					@Override
@@ -31,13 +34,27 @@ public class Finder {
 		closestDrivers.addAll(availableDrivers);
 		
 		while (driver == null && !closestDrivers.isEmpty()) {
-			temp = closestDrivers.poll();
-			if (temp.requestRide()) {
-				driver = temp;
+			tempDriver = closestDrivers.poll();
+			tempTrip = new Trip(tempDriver, passenger, dest);
+			if (tempTrip.getFare() > tempTrip.getPassenger().getBalance()) {
+				/*
+				   	though different rides from different drivers will have different fares,
+					each iteration of this loop will be more expensive than the last
+					meaning that if any are too expensive, all of the following will be as well,
+					and the trip must be cancelled.
+				*/
+				
+				System.out.println("Passenger has insufficient funds!");
+				System.out.println("Trip cancelled!");
+				return null;
+			}
+			
+			if (tempDriver.requestRide(tempTrip)) {
+				driver = tempDriver;
 			}
 		}
 		
-		return driver;
+		return new Trip(driver, passenger, dest);
 	}
 	
 //	public Passenger findPassenger(Location loc) {

@@ -1,7 +1,7 @@
 
 public class Trip {
-	private Location driverStart;
-	private Location passengerStart;
+	private Driver driver;
+	private Passenger passenger;
 	private Location destination;
 	private double eta;
 	private double fare;
@@ -9,17 +9,17 @@ public class Trip {
 	
 	private static final double PAYMENT_RATE = 3.5;
 	
-	public Trip(Location driver, Location passenger, Location dest) {
-		this.driverStart = driver;
-		this.passengerStart = passenger;
+	public Trip(Driver driver, Passenger passenger, Location dest) {
+		this.driver = driver;
+		this.passenger = passenger;
 		this.destination = dest;
 		calculateFare();
 		calculateETA();
 	}
 	
 	public void calculateDistance() {
-		double driverToPassenger = driverStart.getDistanceFrom(passengerStart);
-		double passengerToDest = passengerStart.getDistanceFrom(destination);
+		double driverToPassenger = driver.getLocation().getDistanceFrom(passenger.getLocation());
+		double passengerToDest = passenger.getLocation().getDistanceFrom(destination);
 		this.totalDistance = driverToPassenger + passengerToDest;
 	}
 	
@@ -37,5 +37,13 @@ public class Trip {
 	
 	public void calculateETA() {
 		this.eta = 0;
+	}
+	
+	public Passenger getPassenger() {
+		return this.passenger;
+	}
+	
+	public Driver getDriver() {
+		return this.driver;
 	}
 }

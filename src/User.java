@@ -42,4 +42,8 @@ public abstract class User {
 	public double getRating() {
 		return this.rating;
 	}
+	
+	public double getBalance() {
+		return this.balance;
+	}
 }
