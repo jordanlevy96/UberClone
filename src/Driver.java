@@ -3,10 +3,9 @@ public class Driver extends User {
 	private Vehicle car;
 	private Status status;
 	
-	public Driver(String name, Vehicle v, Finder f) {
+	public Driver(String name, Vehicle v) {
 		super(name, 100.00);
 		this.car = v;
-		
 	}
 
 	public boolean requestRide(Trip trip) {

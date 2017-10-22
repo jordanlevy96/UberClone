@@ -13,6 +13,8 @@ public abstract class User {
 		this.name = name;
 		this.balance = b;
 		this.rating = 4.0;
+		this.location = Location.generateRandomLocation();
+		this.reviews = new ArrayList<Review>();
 	}
 	
 	public void moveTo(Location destination) {
@@ -67,12 +69,13 @@ public abstract class User {
 	}
 	
 	public void notify(String... messages) {
-		System.out.println("MESSAGE TO " + this.name);
+		System.out.println("MESSAGE TO: " + this.name);
 		
 		for (String message : messages) {
 			System.out.print("[");
-			System.out.println(message);
-			System.out.print("]");
+			System.out.print(message);
+			System.out.println("]");
 		}
+		System.out.println();
 	}
 }

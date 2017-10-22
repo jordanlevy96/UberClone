@@ -5,11 +5,13 @@ import java.util.Comparator;
 
 public class Finder {
 	private ArrayList<Driver> availableDrivers;
-//	private PriorityQueue<Passenger> seekingPassengers;
 	
 	public Finder() {
 		availableDrivers = new ArrayList<Driver>();
-//		seekingPassengers = new PriorityQueue<Passenger>();
+	}
+	
+	public void addDriver(Driver d) {
+		availableDrivers.add(d);
 	}
 	
 	public Trip requestDriver(Passenger passenger, Location dest) {
@@ -18,7 +20,7 @@ public class Finder {
 		Location start = passenger.getLocation();
 		Trip tempTrip;
 		
-		PriorityQueue<Driver> closestDrivers = new PriorityQueue<Driver>(availableDrivers.size(),
+		PriorityQueue<Driver> closestDrivers = new PriorityQueue<Driver>(10, //initial capacity does not matter
 				new Comparator<Driver>() {
 					@Override
 					public int compare(Driver d1, Driver d2) {
@@ -36,7 +38,7 @@ public class Finder {
 		
 		while (driver == null && !closestDrivers.isEmpty()) {
 			tempDriver = closestDrivers.poll();
-			if (tempDriver.isAvailable()) {
+			if (!tempDriver.isAvailable()) {
 				//this driver is not currently available
 				continue;
 			}
@@ -60,9 +62,4 @@ public class Finder {
 		
 		return new Trip(driver, passenger, dest);
 	}
-	
-//	public Passenger findPassenger(Location loc) {
-//		return seekingPassengers.poll(); //gets first seeking passenger
-//		//not sure if necessary at all
-//	}
 }

@@ -14,6 +14,14 @@ public class Location {
 	}
 	
 	public String toString() {
-		return "[" + Integer.toString(x) + ", " + Integer.toString(y) + "]";
+		return "(" + Integer.toString(x) + ", " + Integer.toString(y) + ")";
+	}
+
+	public static Location generateRandomLocation() {
+		int x = (int) (Math.random() * 300);
+		int y = (int) (Math.random() * 300);
+		System.out.println("Generating random location at (" + Integer.toString(x)
+				+ ", " + Integer.toString(y) + ")");
+		return new Location(x, y);
 	}
 }

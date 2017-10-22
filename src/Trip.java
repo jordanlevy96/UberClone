@@ -8,13 +8,18 @@ public class Trip {
 	private double fare;
 	private double totalDistance;
 	
-	private static final double PAYMENT_RATE = 3.5; //dollars per distance unit
-	private static final double TRAVEL_RATE = 0.85; //time per distance unit
+	private static final double PAYMENT_RATE = 0.25; //dollars per distance unit
+	private static final double TRAVEL_RATE = 0.15; //time per distance unit
 	
 	public Trip(Driver driver, Passenger passenger, Location dest) {
 		this.driver = driver;
 		this.passenger = passenger;
 		this.destination = dest;
+		
+		if (driver == null || passenger == null) {
+			//this is possible if no drivers are available for a trip
+			return;
+		}
 		
 		double driverToPassenger = driver.getLocation().getDistanceFrom(passenger.getLocation());
 		double passengerToDest = passenger.getLocation().getDistanceFrom(destination);

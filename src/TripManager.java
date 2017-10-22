@@ -1,12 +1,12 @@
 
 public class TripManager {
-	public TripManager() {
-		
-	}
-	
-	public void handleTrip(Passenger passenger, Location dest, Finder finder) {
+	public static void handleTrip(Passenger passenger, Location dest, Finder finder) {
 		//Passenger requests a ride
 		Trip trip = passenger.requestRide(dest, finder);
+		if (trip == null) {
+			//trip was cancelled
+			return;
+		}
 		Driver driver = trip.getDriver();
 		
 		//Driver gets to Passenger
