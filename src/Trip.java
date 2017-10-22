@@ -3,40 +3,40 @@ public class Trip {
 	private Driver driver;
 	private Passenger passenger;
 	private Location destination;
-	private double eta;
+	private double eta1; //driver to passenger
+	private double eta2; //start to destination
 	private double fare;
 	private double totalDistance;
 	
-	private static final double PAYMENT_RATE = 3.5;
+	private static final double PAYMENT_RATE = 3.5; //dollars per distance unit
+	private static final double TRAVEL_RATE = 0.85; //time per distance unit
 	
 	public Trip(Driver driver, Passenger passenger, Location dest) {
 		this.driver = driver;
 		this.passenger = passenger;
 		this.destination = dest;
-		calculateFare();
-		calculateETA();
-	}
-	
-	public void calculateDistance() {
+		
 		double driverToPassenger = driver.getLocation().getDistanceFrom(passenger.getLocation());
 		double passengerToDest = passenger.getLocation().getDistanceFrom(destination);
 		this.totalDistance = driverToPassenger + passengerToDest;
+		
+		this.eta1 = driverToPassenger * TRAVEL_RATE;
+		this.eta2 = this.totalDistance * TRAVEL_RATE;
+		
+		this.fare = this.totalDistance * PAYMENT_RATE;
+		
 	}
 	
 	public double getFare() {
 		return this.fare;
 	}
 	
-	public void calculateFare() {
-		this.fare = this.totalDistance * PAYMENT_RATE;
+	public double getETA1() {
+		return this.eta1;
 	}
 	
-	public double getETA() {
-		return this.eta;
-	}
-	
-	public void calculateETA() {
-		this.eta = 0;
+	public double getETA2() {
+		return this.eta2;
 	}
 	
 	public Passenger getPassenger() {

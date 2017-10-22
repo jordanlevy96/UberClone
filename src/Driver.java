@@ -28,7 +28,8 @@ public class Driver extends User {
 			
 			this.status = Status.OCCUPIED;
 			trip.getPassenger().notify(this.getName() + " has accepted your trip.",
-					"They are now en route to your location.");
+					"They are now en route to your location; ETA " + trip.getETA1() + " minutes",
+					"You should arrive at your destination in " + trip.getETA2() + " minutes.");
 		}
 		
 		return answer;
@@ -45,5 +46,9 @@ public class Driver extends User {
 		}
 		
 		return false;
+	}
+	
+	public Vehicle getVehicle() {
+		return this.car;
 	}
 }

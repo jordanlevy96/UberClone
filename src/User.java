@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class User {
 	protected String name;
@@ -21,19 +23,24 @@ public abstract class User {
 		OCCUPIED;
 	}
 	
+	public void moveTo(Location destination) {
+		Timer t = new Timer();
+		long delay = (long) this.location.getDistanceFrom(destination) * 100;
+		
+		t.schedule(new TimerTask() {
+
+			@Override
+			public void run() {
+				location = destination;
+			}
+		}, delay);
+		
+		notify("Arrived at " + location.toString());
+	}
+	
 	public void addReview(Review r) {
 		reviews.add(r);
 		updateRating();
-	}
-	
-	public void notify(String... messages) {
-		System.out.println("MESSAGE TO " + this.name);
-		
-		for (String message : messages) {
-			System.out.print("[");
-			System.out.println(message);
-			System.out.print("]");
-		}
 	}
 	
 	private void updateRating() {
@@ -65,5 +72,15 @@ public abstract class User {
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public void notify(String... messages) {
+		System.out.println("MESSAGE TO " + this.name);
+		
+		for (String message : messages) {
+			System.out.print("[");
+			System.out.println(message);
+			System.out.print("]");
+		}
 	}
 }
