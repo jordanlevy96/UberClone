@@ -5,14 +5,20 @@ public abstract class User {
 	protected double balance;
 	protected ArrayList<Review> reviews;
 	protected double rating;
-	protected Finder finder;
 	protected Location location;
+	protected Status status;
 	
-	public User(String name, double b, Finder f) {
+	public User(String name, double b) {
 		this.name = name;
 		this.balance = b;
-		this.rating = 5.0;
-		this.finder = f;
+		this.rating = 4.0;
+		this.status = Status.OFFLINE;
+	}
+	
+	protected enum Status {
+		OFFLINE,
+		AVAILABLE,
+		OCCUPIED;
 	}
 	
 	public void addReview(Review r) {
@@ -20,7 +26,17 @@ public abstract class User {
 		updateRating();
 	}
 	
-	public void updateRating() {
+	public void notify(String... messages) {
+		System.out.println("MESSAGE TO " + this.name);
+		
+		for (String message : messages) {
+			System.out.print("[");
+			System.out.println(message);
+			System.out.print("]");
+		}
+	}
+	
+	private void updateRating() {
 		double avg = 0.0;
 		for (Review r : reviews) {
 			avg += r.getRating();
@@ -45,5 +61,9 @@ public abstract class User {
 	
 	public double getBalance() {
 		return this.balance;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 }

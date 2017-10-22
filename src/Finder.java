@@ -1,4 +1,5 @@
 import java.util.PriorityQueue;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -35,6 +36,10 @@ public class Finder {
 		
 		while (driver == null && !closestDrivers.isEmpty()) {
 			tempDriver = closestDrivers.poll();
+			if (tempDriver.isAvailable()) {
+				//this driver is not currently available
+				continue;
+			}
 			tempTrip = new Trip(tempDriver, passenger, dest);
 			if (tempTrip.getFare() > tempTrip.getPassenger().getBalance()) {
 				/*
@@ -44,8 +49,7 @@ public class Finder {
 					and the trip must be cancelled.
 				*/
 				
-				System.out.println("Passenger has insufficient funds!");
-				System.out.println("Trip cancelled!");
+				passenger.notify("Insufficient funds!", "Trip cancelled!");
 				return null;
 			}
 			

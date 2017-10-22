@@ -46,4 +46,8 @@ public class Trip {
 	public Driver getDriver() {
 		return this.driver;
 	}
+	
+	public Location getDestination() {
+		return this.destination;
+	}
 }

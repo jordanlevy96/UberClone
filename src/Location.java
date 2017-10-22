@@ -12,4 +12,8 @@ public class Location {
 		double distance = Math.sqrt(Math.pow((other.x - this.x), 2) + Math.pow((other.y - this.y), 2));
 		return distance;
 	}
+	
+	public String toString() {
+		return "[" + Integer.toString(x) + ", " + Integer.toString(y) + "]";
+	}
 }

@@ -1,10 +1,10 @@
 
 public class Passenger extends User {
-	public Passenger(String name, double balance, Finder f) {
-		super(name, balance, f);
+	public Passenger(String name, double balance) {
+		super(name, balance);
 	}
 	
-	public Trip requestRide(Location dest) {
+	public Trip requestRide(Location dest, Finder finder) {
 		Trip trip = finder.requestDriver(this, dest);
 		
 		if (trip == null) {
@@ -12,8 +12,7 @@ public class Passenger extends User {
 			return null;
 		}
 		else if (trip.getDriver() == null) {
-			System.out.println("Could not find Driver!");
-			System.out.println("Trip cancelled!");
+			notify("Could not find Driver!", "Trip cancelled!");
 			return null;
 		}
 		else {
@@ -24,5 +23,6 @@ public class Passenger extends User {
 	
 	private void payForRide(Trip trip) {
 		this.balance -= trip.getFare();
+		notify("You have paid for your trip.");
 	}
 }
