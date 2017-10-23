@@ -1,13 +1,17 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.json.simple.JSONObject;
 
 public class Main {
 	public static void main(String[] args) {
 		ArrayList<Driver> drivers = new ArrayList<Driver>();
 		ArrayList<Passenger> passengers = new ArrayList<Passenger>();
+		ArrayList<Trip> trips = new ArrayList<Trip>();
 		
 		Finder finder = new Finder();
 						
@@ -19,10 +23,10 @@ public class Main {
 		}
 		
 		for (Passenger p : passengers) {
-			TripManager.handleTrip(p, Location.generateRandomLocation(), finder).exportJSON(p.getName());;
+			trips.add(TripManager.handleTrip(p, Location.generateRandomLocation(), finder));
 		}
 		
-	
+		handleJSON(trips, drivers, passengers);
 	}
 
 	private static void extractDataFromFile(String filename, ArrayList<Driver> drivers,
@@ -63,5 +67,52 @@ public class Main {
 			e.printStackTrace();
 			System.exit(1);
 		}
+	}
+	
+	public static void handleJSON(ArrayList<Trip> trips,
+			ArrayList<Driver> drivers, ArrayList<Passenger> passengers) {
+		
+		//get JSON logs for each trip
+		for (Trip t : trips) {
+			t.exportJSON(t.getPassenger().getName() + "-trip.log");
+		}
+		
+		//create final output
+		JSONObject obj = new JSONObject();
+		obj.put("numTrips", trips.size());
+		int transactions = 0;
+		for (Trip t : trips) {
+			if (t.getStatus() == CompletionStatus.COMPLETED) {
+				transactions += 2;
+			}
+		}
+		obj.put("numTransactions", transactions);
+		
+		for (Driver d : drivers) {
+			JSONObject driver = new JSONObject();
+			driver.put("balance", d.getBalance());
+			driver.put("rating", d.getRating());
+			driver.put("location", d.getLocation().toString());
+			obj.put(d.getName(), driver);
+		}
+		
+		for (Passenger p : passengers) {
+			JSONObject passenger = new JSONObject();
+			passenger.put("balance", p.getBalance());
+			passenger.put("rating", p.getRating());
+			passenger.put("location", p.getLocation().toString());
+			obj.put(p.getName(), passenger);
+		}
+		
+		try {
+			FileWriter fw = new FileWriter(new File("final-output.txt"));
+			fw.write(obj.toJSONString());
+			fw.close();
+		}
+		catch (IOException e) {
+			System.out.println("Something went wrong while exporting JSON.");
+			e.printStackTrace();
+		}
+		
 	}
 }
