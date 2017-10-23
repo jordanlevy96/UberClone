@@ -52,7 +52,9 @@ public class Finder {
 				*/
 				
 				passenger.notify("Insufficient funds!", "Trip cancelled!");
-				return null;
+				Trip trip = new Trip(null, passenger, dest);
+				trip.setStatus(CompletionStatus.INSUFFICIENT_FUNDS);
+				return trip;
 			}
 			
 			if (tempDriver.requestRide(tempTrip)) {

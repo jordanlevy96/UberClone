@@ -1,7 +1,12 @@
+import org.json.simple.JSONObject;
 
 public class Passenger extends User {
 	public Passenger(String name, double balance) {
 		super(name, balance);
+	}
+	
+	public Passenger(String name, double balance, Location l) {
+		super(name, balance, l);
 	}
 	
 	public Trip requestRide(Location dest, Finder finder) {
@@ -13,10 +18,12 @@ public class Passenger extends User {
 		}
 		else if (trip.getDriver() == null) {
 			notify("Could not find Driver!", "Trip cancelled!");
-			return null;
+			trip.setStatus(CompletionStatus.NO_DRIVER);
+			return trip;
 		}
 		else {
 			payForRide(trip);
+			trip.setStatus(CompletionStatus.COMPLETED);
 			return trip;
 		}
 	}
@@ -26,7 +33,7 @@ public class Passenger extends User {
 		notify("You have paid for your trip.");
 	}
 	
-	public Review generateReview(Trip trip) {
+	public Review generateDriverReview(Trip trip) {
 		String comments;
 		
 		Double rating = Math.random() * 10;
@@ -44,5 +51,15 @@ public class Passenger extends User {
 		}
 		
 		return new Review(rating, trip, comments);
+	}
+	
+	public JSONObject exportToJSON() {
+		JSONObject obj = new JSONObject();
+		obj.put("name", this.name);
+		obj.put("balance", this.balance);
+		obj.put("location", this.location.toString());
+		obj.put("rating", rating);
+		
+		return obj;
 	}
 }

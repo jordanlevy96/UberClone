@@ -17,6 +17,14 @@ public abstract class User {
 		this.reviews = new ArrayList<Review>();
 	}
 	
+	public User(String name, double b, Location l) {
+		this.name = name;
+		this.balance = b;
+		this.rating = 4.0;
+		this.location = l;
+		this.reviews = new ArrayList<Review>();
+	}
+	
 	public void moveTo(Location destination) {
 		Timer t = new Timer();
 		long delay = (long) this.location.getDistanceFrom(destination) * 100;

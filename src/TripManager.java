@@ -1,11 +1,11 @@
 
 public class TripManager {
-	public static void handleTrip(Passenger passenger, Location dest, Finder finder) {
+	public static Trip handleTrip(Passenger passenger, Location dest, Finder finder) {
 		//Passenger requests a ride
 		Trip trip = passenger.requestRide(dest, finder);
-		if (trip == null) {
+		if (trip.getStatus() != CompletionStatus.COMPLETED) {
 			//trip was cancelled
-			return;
+			return trip;
 		}
 		Driver driver = trip.getDriver();
 		
@@ -15,11 +15,16 @@ public class TripManager {
 		
 		//Arrive at destination
 		driver.moveTo(dest);
+		driver.notify(passenger.getName() + "'s trip is complete!", "Don't forget to leave a review!");
 		passenger.moveTo(dest);
 		passenger.notify("You have arrived!", "Don't forget to review your driver!");
 		
-		Review review = passenger.generateReview(trip);
-		driver.addReview(review);
+		Review dReview = driver.generatePassengerReview(trip);
+		passenger.addReview(dReview);
+		Review pReview = passenger.generateDriverReview(trip);
+		driver.addReview(pReview);
 		driver.setStatus(Status.AVAILABLE);
+		
+		return trip;
 	}
 }
