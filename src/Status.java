@@ -1,3 +1,8 @@
+/**
+ * Simple enum to express availability of Drivers
+ * @author Jordan
+ *
+ */
 public enum Status {
 	OFFLINE, AVAILABLE, OCCUPIED;
 	

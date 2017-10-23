@@ -1,5 +1,10 @@
 import org.json.simple.JSONObject;
 
+/**
+ * Class representation of a Passenger that requests rides from a Driver
+ * @author Jordan
+ *
+ */
 public class Passenger extends User {
 	public Passenger(String name, double balance) {
 		super(name, balance);
@@ -9,16 +14,22 @@ public class Passenger extends User {
 		super(name, balance, l);
 	}
 	
+	/**
+	 * Using a finder to find a Driver, requests a ride to dest(ination)
+	 * and pays for the ride, if successful
+	 * @param dest
+	 * @param finder
+	 * @return Trip object detailing everything that happened in the Trip
+	 */
 	public Trip requestRide(Location dest, Finder finder) {
 		Trip trip = finder.requestDriver(this, dest);
 		
-		if (trip == null) {
-			//Trip cancelled due to insufficient funds
-			return null;
+		if (trip.getStatus() == CompletionStatus.INSUFFICIENT_FUNDS) {
+			notify("Insufficient funds!", "Trip cancelled!");
+			return trip;
 		}
-		else if (trip.getDriver() == null) {
+		else if (trip.getStatus() == CompletionStatus.NO_DRIVER) {
 			notify("Could not find Driver!", "Trip cancelled!");
-			trip.setStatus(CompletionStatus.NO_DRIVER);
 			return trip;
 		}
 		else {
@@ -28,11 +39,20 @@ public class Passenger extends User {
 		}
 	}
 	
+	/**
+	 * sneaky secret (and secure :p) private function for Passengers to pay for their Trip
+	 * @param trip
+	 */
 	private void payForRide(Trip trip) {
 		this.balance -= trip.getFare();
 		notify("You have paid for your trip.");
 	}
 	
+	/**
+	 * Generates a random review for a Driver after a Trip, with relevant comments
+	 * @param trip
+	 * @return Review object detailing their satisfaction with the Driver
+	 */
 	public Review generateDriverReview(Trip trip) {
 		String comments;
 		
@@ -53,6 +73,10 @@ public class Passenger extends User {
 		return new Review(rating, trip, comments);
 	}
 	
+	/**
+	 * Create JSON representation of the Passenger, including their final Location
+	 * @return JSONObject
+	 */
 	public JSONObject exportToJSON() {
 		JSONObject obj = new JSONObject();
 		obj.put("name", this.name);

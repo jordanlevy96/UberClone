@@ -1,0 +1,84 @@
+commit 7fad38e1839419113b31a4468ccb27655f4f4ff0
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Sun Oct 22 20:21:15 2017 -0700
+
+    added final output stuff and deleted unused Map class
+
+commit 16b6214ccad54ac13230b98328ac3c26c268314c
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Sun Oct 22 20:04:09 2017 -0700
+
+    JSON Simple jar file
+
+commit f3508bdbd1a55c71d35d407e306908009552444f
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Sun Oct 22 20:03:44 2017 -0700
+
+    added JSON stuff and cleanup
+
+commit 6dc150793f183e19866df9e3b45f127b1233078c
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Sun Oct 22 15:59:27 2017 -0700
+
+    test trips in main, debugging, gitignore
+
+commit f54cb7367edafa235287a7ef57625caec5d2b06e
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Sun Oct 22 15:09:39 2017 -0700
+
+    refactored Status a little bit; made it fully fledged enum instead of inner
+
+commit 5b19b5950a658891b5cee1a7cb5f2c70e2b37fe3
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Sun Oct 22 14:58:23 2017 -0700
+
+    implemented TripManager class to handle entire Trips. GenerateReview and moveTo (with Timer) added
+
+commit faa76854540ab64303f95afe4735b2a723cb2823
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Sat Oct 21 19:14:17 2017 -0700
+
+    added notify function and started TripManager
+
+commit f2b93e24fe3fa4365cb0020cb905dc78b06f4249
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Sat Oct 21 17:53:39 2017 -0700
+
+    payments and insufficient funds handled
+
+commit 2ea2d8cb895602bd65881635644df1262fd5b908
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Sat Oct 21 16:48:38 2017 -0700
+
+    added rating to priority and fare calculation
+
+commit 9bb1b7cb715bca269996939f2df037b1b07b7d4b
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Sat Oct 21 16:24:58 2017 -0700
+
+    added requestDriver function to Finder
+
+commit b2fc2ccd5a1ba5a09746d6a14d03f17fc310d812
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Wed Oct 18 20:26:21 2017 -0700
+
+    Added more attributes/getters, switched to PriorityQueue
+
+commit 553db804c2b5c80be7e8ab5374d0d2ba234f3d15
+Merge: 47951e7 e9d081b
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Tue Oct 10 12:45:12 2017 -0700
+
+    Merge branch 'master' of https://github.com/jordanlevy96/UberClone
+
+commit 47951e7d8aa2a8028c309ffbcb783d9a8638f8fc
+Author: jordanlevy96 <jordanlevy96@gmail.com>
+Date:   Tue Oct 10 12:39:53 2017 -0700
+
+    first commit
+
+commit e9d081b4314b11dd8176b6e83578de00ff85ab91
+Author: jordanlevy96 <jordanlevy96@users.noreply.github.com>
+Date:   Mon Oct 9 21:28:34 2017 -0700
+
+    Initial commit

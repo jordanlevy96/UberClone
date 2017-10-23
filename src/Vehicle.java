@@ -1,4 +1,9 @@
-
+/**
+ * Class representation of a Driver's car.
+ * Really just some fluff to make everything seem more legit
+ * @author Jordan
+ *
+ */
 public class Vehicle {
 	private String make;
 	private String model;

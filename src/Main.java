@@ -7,6 +7,11 @@ import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 
+/**
+ * Do stuff! :)
+ * @author Jordan
+ *
+ */
 public class Main {
 	public static void main(String[] args) {
 		ArrayList<Driver> drivers = new ArrayList<Driver>();
@@ -18,7 +23,7 @@ public class Main {
 		extractDataFromFile("src/input_data.txt", drivers, passengers);
 		
 		for (Driver d : drivers) {
-			d.setStatus(Status.AVAILABLE);
+//			d.setStatus(Status.AVAILABLE);
 			finder.addDriver(d);
 		}
 		
@@ -29,6 +34,14 @@ public class Main {
 		handleJSON(trips, drivers, passengers);
 	}
 
+	/**
+	 * Read from file (filename) to extract Drivers and Passengers
+	 * Drivers appear as "driver <name> <car color> <car year> <car make> <car model> <Location x> <Location y>"
+	 * Passengers appear as "passenger <name> <starting balance> <Location x> <Location y>
+	 * @param filename
+	 * @param drivers
+	 * @param passengers
+	 */
 	private static void extractDataFromFile(String filename, ArrayList<Driver> drivers,
 			ArrayList<Passenger> passengers) {
 
@@ -69,6 +82,14 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * exports all data into JSON
+	 * Each trip is summed into a JSON file named passengerName-trip.log
+	 * Entire run is summarized into a "final-output.txt" with all the finalized data after every trip
+	 * @param trips
+	 * @param drivers
+	 * @param passengers
+	 */
 	public static void handleJSON(ArrayList<Trip> trips,
 			ArrayList<Driver> drivers, ArrayList<Passenger> passengers) {
 		

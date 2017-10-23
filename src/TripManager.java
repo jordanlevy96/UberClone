@@ -1,5 +1,16 @@
-
+/**
+ * Helper class that runs through all the steps of a Trip
+ * @author Jordan
+ *
+ */
 public class TripManager {
+	/**
+	 * The main function of the program; handles just about everything for a successful Trip
+	 * @param passenger
+	 * @param dest
+	 * @param finder
+	 * @return
+	 */
 	public static Trip handleTrip(Passenger passenger, Location dest, Finder finder) {
 		//Passenger requests a ride
 		Trip trip = passenger.requestRide(dest, finder);

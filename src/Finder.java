@@ -3,6 +3,11 @@ import java.util.PriorityQueue;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * Utility class that keeps track of all registered Drivers and finds rides for seeking Passengers
+ * @author Jordan
+ *
+ */
 public class Finder {
 	private ArrayList<Driver> availableDrivers;
 	
@@ -14,6 +19,13 @@ public class Finder {
 		availableDrivers.add(d);
 	}
 	
+	/**
+	 * Finds the closest (and highest rated) Driver to the passenger that would be able to
+	 * give them a ride, and requests the Driver to do the Trip
+	 * @param passenger
+	 * @param dest(ination)
+	 * @return Trip object with all relevant data, including cancellation status, if applicable
+	 */
 	public Trip requestDriver(Passenger passenger, Location dest) {
 		Driver driver = null;
 		Driver tempDriver;
@@ -28,7 +40,7 @@ public class Finder {
 						double dist2 = d2.getLocation().getDistanceFrom(start);
 						int comparison = Double.compare(dist1, dist2);
 						if (comparison == 0) {
-							return Double.compare(d1.getRating(), d2.getRating());
+							return Double.compare(d2.getRating(), d1.getRating());
 						}
 						return comparison;
 					}
@@ -51,15 +63,16 @@ public class Finder {
 					and the trip must be cancelled.
 				*/
 				
-				passenger.notify("Insufficient funds!", "Trip cancelled!");
-				Trip trip = new Trip(null, passenger, dest);
-				trip.setStatus(CompletionStatus.INSUFFICIENT_FUNDS);
-				return trip;
+				return new Trip(passenger, CompletionStatus.INSUFFICIENT_FUNDS);
 			}
 			
 			if (tempDriver.requestRide(tempTrip)) {
 				driver = tempDriver;
 			}
+		}
+		
+		if (driver == null) {
+			return new Trip(passenger, CompletionStatus.NO_DRIVER);
 		}
 		
 		return new Trip(driver, passenger, dest);

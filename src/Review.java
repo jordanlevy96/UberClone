@@ -1,4 +1,8 @@
-
+/**
+ * Simple class that contains a 0-5 rating of a User, the relevant Trip, and any additional comments
+ * @author Jordan
+ *
+ */
 public class Review {
 	private double rating;
 	private Trip trip;
